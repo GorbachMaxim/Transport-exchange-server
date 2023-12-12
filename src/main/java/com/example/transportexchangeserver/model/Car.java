@@ -17,9 +17,8 @@ public class Car {
 
     private String volume;
 
-    private String dimensions;
-
-    private String type;
+    @Column(columnDefinition="VARCHAR")
+    private String image;
 
     @Column(columnDefinition="VARCHAR")
     private String description;

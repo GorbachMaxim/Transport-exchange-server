@@ -1,17 +1,22 @@
 package com.example.transportexchangeserver.model;
 
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import lombok.Data;
 
+import javax.persistence.*;
+
+@Data
+@Entity
 public class Comment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
     @Column(columnDefinition="VARCHAR")
     private String text;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "company_id")
-    private CarOffer carOffer;
+    @JoinColumn(name = "offer_id")
+    private Offer offer;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")

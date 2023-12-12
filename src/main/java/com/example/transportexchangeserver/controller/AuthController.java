@@ -72,7 +72,7 @@ public class AuthController {
 	
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@RequestBody @Valid SignupRequest signupRequest) {
-		
+
 		if (userRepository.existsByUsername(signupRequest.getUsername())) {
 			return ResponseEntity
 					.badRequest()
@@ -117,6 +117,10 @@ public class AuthController {
 			});
 		}
 		user.setRoles(roles1);
+
+
+		///УУУУУУУУУУУУБРААААААААААААААТЬ
+		user.setVerified(true);
 		userRepository.save(user);
 
 		Authentication authentication = authenticationManager

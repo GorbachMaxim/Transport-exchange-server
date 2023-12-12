@@ -1,5 +1,6 @@
 package com.example.transportexchangeserver.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,4 +16,6 @@ public class Role {
 
     @Enumerated(EnumType.STRING)
     private ERole name;
+
+
 }

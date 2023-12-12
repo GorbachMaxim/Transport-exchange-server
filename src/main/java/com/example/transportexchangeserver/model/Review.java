@@ -7,9 +7,9 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 
-//@Data
-//@Entity
-//@Table(name = "review")
+@Data
+@Entity
+@Table(name = "review")
 public class Review {
 
     @Id

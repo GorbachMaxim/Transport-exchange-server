@@ -3,7 +3,9 @@ package com.example.transportexchangeserver.service;
 
 import com.example.transportexchangeserver.config.jwt.AuthTokenFilter;
 import com.example.transportexchangeserver.config.jwt.JwtUtils;
+import com.example.transportexchangeserver.model.Company;
 import com.example.transportexchangeserver.model.User;
+import com.example.transportexchangeserver.repository.CompanyRepository;
 import com.example.transportexchangeserver.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,12 +15,16 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private CompanyRepository companyRepository;
 
     @Autowired
     private JwtUtils jwtUtils;
@@ -36,6 +42,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     public void deleteUserById(long id){
+        Optional<User> user = userRepository.findById(id);
+        if(user.isPresent()){
+            Optional<Company> company = companyRepository.getCompanyByUser_Id(user.get().getId());
+            if(company.isPresent()){
+                companyRepository.delete(company.get());
+            }
+        }
         userRepository.deleteById(id);
     }
 
